@@ -42,6 +42,4 @@ This project is intended to learn how we can incorporate chaos engineering withi
 
 ## Video Demo
 
-![Screenshot](chaosEngineering.mp4)
-
 ![Screenshot](ChaosEngineering.gif)
