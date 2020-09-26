@@ -1,0 +1,15 @@
+1: Create free tier gremlin account.
+
+2: Install iproute tc dependencies.
+
+sudo yum install -y iproute-tc
+
+3: Download gremlin repo for agent.
+
+sudo curl https://rpm.gremlin.com/gremlin.repo -o /etc/yum.repos.d/gremlin.repo
+
+4: Install gemlin
+
+sudo yum install -y gremlin gremlind
+Start the Gremlin daemon:
+gremlin init

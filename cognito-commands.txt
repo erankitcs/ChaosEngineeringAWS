@@ -1,0 +1,26 @@
+
+1: Creating identity pool.
+aws cognito-identity create-identity-pool `
+    --identity-pool-name DynamoPool `
+    --allow-unauthenticated-identities `
+    --output json
+
+2: Creating IAM role which can be assumed by Cognito identity. Update cognito ID into myCognitoPolicy.json file before proceeding.
+
+aws iam create-role --role-name Cognito_DynamoPoolUnauth --assume-role-policy-document file://myCognitoPolicy.json --output json
+
+3: Attching role a policy to read Dynamo DB
+aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess --role-name Cognito_DynamoPoolUnauth
+
+4: Checking created role details.
+aws iam get-role --role-name Cognito_DynamoPoolUnauth --output json
+
+5: Attch role with identity pool. Update your pool id and role arn
+aws cognito-identity set-identity-pool-roles `
+--identity-pool-id "us-east-1:d95a85cf-f458-4b97-9413-1b65f7570704" `
+--roles unauthenticated=arn:aws:iam::852744270679:role/Cognito_DynamoPoolUnauth --output json
+
+6: Verify attched role.
+aws cognito-identity get-identity-pool-roles  --identity-pool-id "us-east-1:d95a85cf-f458-4b97-9413-1b65f7570704"
+
+7: You can update Index.html with above details.
